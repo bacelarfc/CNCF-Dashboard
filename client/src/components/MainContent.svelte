@@ -1,12 +1,10 @@
 <script>
-    import {
-        cncfData,
-        selectedCategory,
-        getFullLogoUrl,
-    } from "../store/contentStore.js";
+    import "../styles/userDetails.scss";
+    import Icon from '@iconify/svelte';
+    import {cncfData,selectedCategory,getFullLogoUrl } from "../store/contentStore.js";
     import CardDetailsModal from "./CardDetailsModal.svelte";
-    import Icon from "@iconify/svelte";
     import { toggleFavorite } from "../store/favoritesStore.js";
+    
 
     let selectedProject = null;
 
@@ -24,17 +22,19 @@
         selectedProject = null;
     }
 
-    $: filteredData = $selectedCategory
-        ? $cncfData.filter((item) => item.category === $selectedCategory)
-        : $cncfData;
+export let sortBy;
+
+$: filteredAndSortedData = $cncfData
+        .filter(item => !$selectedCategory || item.category === $selectedCategory)
+        .sort((a, b) => sortBy === 'starCount' ? b.stars - a.stars : 0);
 </script>
 
 <div class="content-main">
-    {#if filteredData.length === 0}
+    {#if filteredAndSortedData.length === 0}
         <p>No data available.</p>
     {:else}
         <div class="card-grid">
-            {#each filteredData as item}
+            {#each filteredAndSortedData as item}
                 <article
                     class="card"
                     on:click={() => openProjectModal(item)}
@@ -64,6 +64,9 @@
                     </div>
                     <div class="card-body">
                         <p>{item.description}</p>
+                        {#if item.stars !== undefined}
+                        <p class="small-text"><Icon icon="ic:baseline-star" class="icon" />{item.stars}</p>
+                    {/if}
                     </div>
                     <div class="card-footer">
                         {#if item.repo_url}

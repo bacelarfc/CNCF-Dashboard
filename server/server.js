@@ -4,7 +4,17 @@ import router from './routers/router.js';
 import projectRouter from './routers/projectRouter.js';
 import userRouter from "./routers/userRouter.js";
 import loginRouter from "./routers/loginRouter.js";
-import cors from 'cors'; 
+import cors from 'cors';
+import { createClient } from 'redis';
+
+// Initialize Redis
+const redisClient = createClient({
+  host: 'localhost',
+  port: 6379,
+});
+await redisClient.connect();
+export { redisClient };
+
 const app = express();
 app.use(cors());
 app.use(express.static("../client/dist"));

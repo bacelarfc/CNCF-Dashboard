@@ -15,14 +15,9 @@
   /*===== Fonts =====*/
   --normal-font-size: 1rem;
   --small-font-size: .875rem;
-
-  /*===== Z index =====*/
   --z-fixed: 100;
-
-  background: #12192C;
 }
 
-/*===== BASE =====*/
 
 *,
 ::before,
@@ -110,7 +105,7 @@ label {
 }
 
 #submit-button:hover {
-  background: (var(--bg-color));
+  background: "404089";
   font-weight: bold;
   color: (var(--bg-color));
   border: 2px solid var(--second-color);

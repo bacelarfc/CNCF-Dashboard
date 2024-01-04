@@ -1,4 +1,5 @@
 <script>
+  import "../styles/userDetails.scss";
   import { onMount } from "svelte";
   import { userDetails, fetchUserDetails } from "../store/userStore.js";
   import { cncfData, fetchData } from "../store/contentStore.js";
@@ -30,13 +31,8 @@
     <h2>{$userDetails.firstName}</h2>
     <p>{$userDetails.email}</p>
   </div>
-  <!-- Favorite Projects -->
   <div class="user-favorites">
     <h3>Favorite Projects</h3>
-    <a class="button">
-      <i class="ph-plus-bold"></i>
-      <span>Filter</span>
-    </a>
     {#each favoriteProjects as project}
       <div class="favorite-project card">
         <div class="card-header">

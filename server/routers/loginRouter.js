@@ -39,9 +39,6 @@ router.post('/login', async (req, res) => {
       const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: '1h',
       });
-      console.log(`Login successful for email: ${email}`);
-      console.log(`Generated token: Bearer ${token}`);
-
       res.json({ message: 'Logged in', token: 'Bearer ' + token });
     } else {
       res.status(400).json({ message: 'Incorrect password' });

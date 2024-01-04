@@ -12,7 +12,6 @@ const connectToDb = async () => {
       // const client = await MongoClient.connect("mongodb://host.docker.internal:27017/cncf");
 
       dbConnection = client.db();
-      console.log('Database connection established');
     } catch (err) {
       console.error('Failed to connect to MongoDB:', err);
       throw err;

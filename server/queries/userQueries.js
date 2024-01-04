@@ -6,7 +6,6 @@ export async function getUserByEmail(email) {
     const db = getDb();
     const usersCollection = db.collection('users');
     const user = await usersCollection.findOne({ email: email });
-    console.log("Retrieved user data:", user);
     return user;
   } catch (error) {
     throw error;

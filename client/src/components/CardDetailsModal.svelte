@@ -16,7 +16,7 @@
                 labels: project.github_data.languages.map(lang => lang.name),
                 datasets: [{
                     data: project.github_data.languages.map(lang => lang.value),
-                    backgroundColor: project.github_data.languages.map(lang => lang.color || '#999999') 
+                    backgroundColor: project.github_data.languages.map(lang => lang.color || '') 
                 }]
             };
             new Chart(ctx, {

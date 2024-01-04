@@ -15,6 +15,8 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '16'
+    - name: Change to Server Directory
+      run: cd server
     - name: Install Dependencies
       run: npm install
     - name: Run Tests

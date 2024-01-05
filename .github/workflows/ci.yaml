@@ -20,7 +20,8 @@ jobs:
       working-directory: ./server
       run: npm install
 
-    - name: Build
-      working-directory: ./server
+    - name: Build Svelte App
+      working-directory: ./client
       run: npm run build
+
 

@@ -3,13 +3,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const DATABASE_URL = process.env.DATABASE_URL;
+const DATABASE_URL_DOCKER = process.env.DATABASE_URL_DOCKER;
 
 let dbConnection;
 
 const connectToDb = async () => {
     try {
-      const client = await MongoClient.connect("mongodb://localhost:27017/cncf");
-      // const client = await MongoClient.connect("mongodb://host.docker.internal:27017/cncf");
+      const client = await MongoClient.connect(DATABASE_URL_DOCKER);
 
       dbConnection = client.db();
     } catch (err) {

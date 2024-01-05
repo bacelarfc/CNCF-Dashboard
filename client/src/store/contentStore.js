@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-
+import { API_BASE_URL } from '../utils/auth';
 export const cncfData = writable([]);
 export const selectedCategory = writable(null);
 export const categories = writable([]);
@@ -14,37 +14,6 @@ export const chartData = writable({
     datasets: [] 
 });
 
-// export async function fetchData() {
-//     let token = localStorage.getItem('token');
-//     if (!token) {
-//         console.error('No token found');
-//         cncfData.set(null);
-//         return;
-//     }
-//     if (!token.startsWith('Bearer ')) {
-//         token = `Bearer ${token}`;
-//     }
-
-//     try {
-//         const response = await fetch('http://localhost:8081/api/cncf-data', {
-//             method: 'GET',
-//             headers: {
-//                 'Authorization': token
-//             }
-//         });
-
-//         if (!response.ok) {
-//             throw new Error('Failed to fetch user details');
-//         }
-
-//         const data = await response.json();
-//         cncfData.set(data);
-
-//     } catch (error) {
-//         console.error('Error fetching user details:', error);
-//         cncfData.set(null);
-//     }
-// }
 
 export async function fetchData() {
     let token = localStorage.getItem('token');
@@ -58,7 +27,7 @@ export async function fetchData() {
     }
 
     try {
-        const response = await fetch('http://localhost:8081/api/cncf-data', {
+        const response = await fetch(API_BASE_URL + "/api/cncf-data", {
             method: 'GET',
             headers: {
                 'Authorization': token,

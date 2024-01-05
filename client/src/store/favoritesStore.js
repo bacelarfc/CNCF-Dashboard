@@ -1,7 +1,7 @@
 
 import { writable, get } from 'svelte/store';
-
 import { userDetails } from './userStore.js'; 
+import { API_BASE_URL } from '../utils/auth.js';
 
 const favorites = writable(new Set());
 
@@ -34,7 +34,7 @@ async function updateFavoritesOnServer(newFavoriteProjectId) {
         return;
     }
     try {
-        const response = await fetch('http://localhost:8081/users/addFavorite', {
+        const response = await fetch(API_BASE_URL + "/users/addFavorite", {
             method: 'POST',
             headers: {
                 'Authorization': token,
@@ -66,7 +66,7 @@ export async function removeFavorite(projectId) {
     }
 
     try {
-        const response = await fetch(`http://localhost:8081/users/${userEmail}/removeFavorite/${projectId}`, {
+        const response = await fetch(`${API_BASE_URL}/users/${userEmail}/removeFavorite/${projectId}`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,

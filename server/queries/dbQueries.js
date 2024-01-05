@@ -1,5 +1,9 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import { getDb, connectToDb } from '../databases/connection.js';
 import https from 'https';
+
+const LANDSCAPE_URL = process.env.LANDSCAPE_URL;
 
 async function getCategoryDistribution() {
   await connectToDb();
@@ -17,7 +21,7 @@ async function getCategoryDistribution() {
 
 async function fetchAndStoreCncfData() {
   return new Promise((resolve, reject) => {
-    https.get('https://landscape.cncf.io/data/items.json', (response) => {
+    https.get(LANDSCAPE_URL, (response) => {
       let data = '';
 
       response.on('data', (chunk) => {

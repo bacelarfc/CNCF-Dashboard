@@ -1,4 +1,6 @@
 import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
 import bodyParser from 'body-parser';
 import router from './routers/router.js';
 import projectRouter from './routers/projectRouter.js';
@@ -7,12 +9,17 @@ import loginRouter from "./routers/loginRouter.js";
 import cors from 'cors';
 import { createClient } from 'redis';
 
-// Initialize Redis
 const redisClient = createClient({
-  host: 'localhost',
-  port: 6379,
-});
-await redisClient.connect();
+    url: process.env.REDIS_HOST_PORT || 'localhost',
+  });
+
+  try {
+    await redisClient.connect();
+    console.log("Connected to Redis successfully.");
+  } catch (error) {
+    console.error("Failed to connect to Redis:", error);
+  }
+  
 export { redisClient };
 
 const app = express();

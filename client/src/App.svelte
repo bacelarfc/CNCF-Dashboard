@@ -3,7 +3,7 @@
     import Login from "./Login.svelte";
     import ProtectedRoute from "./components/ProtectedRoute.svelte";
     import Dashboard from "./Dashboard.svelte";
-    import UserDetails from "./Users/UserDetails.svelte";
+    import UserDetails from "./UserDetails.svelte";
     import { onMount, onDestroy } from "svelte";
     import { isAuthenticated } from "./store/store.js";
     import "./styles/dashboard.scss";

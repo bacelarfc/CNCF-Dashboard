@@ -1,13 +1,14 @@
 <script>
     import { onMount } from "svelte";
+    import { API_BASE_URL} from "../utils/auth.js"
     import { Chart, registerables } from "chart.js";
     Chart.register(...registerables);
     let chartRef;
     let categoryData = { labels: [], datasets: [] };
 
     onMount(async () => {
-        const response = await fetch(
-            "http://localhost:8081/api/category-distribution",
+        const response = await fetch(API_BASE_URL + 
+           "/api/category-distribution",
         );
         if (response.ok) {
             const data = await response.json();

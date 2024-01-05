@@ -1,4 +1,6 @@
 import { writable } from 'svelte/store'; 
+import { API_BASE_URL } from '../utils/auth';
+export { API_BASE_URL} from "../utils/auth.js"
 export const userDetails = writable(JSON.parse(localStorage.getItem('userDetails')) || null);
 
 export function updateUserDetails(data) {
@@ -17,7 +19,7 @@ export async function fetchUserDetails() {
     }
 
     try {
-        const response = await fetch('http://localhost:8081/auth/user', {
+        const response = await fetch(API_BASE_URL +'/auth/user', {
             method: 'GET',
             headers: {
                 'Authorization': token,

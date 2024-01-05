@@ -1,32 +1,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-deployment
+  name: cncf-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: myapp
+      app: cncf-dashboard
   template:
     metadata:
       labels:
-        app: myapp
+        app: cncf-dashboard
     spec:
       containers:
-      - name: myapp
-        image: myapp:latest
+      - name: cncf-dashboard
+        image: ${IMAGE}
         imagePullPolicy: IfNotPresent
+      - name: redis
+        image: ${REDIS_IMAGE}
         ports:
         - containerPort: 8081
-
+        env:
+          - name: DATABASE_URL
+            value: ${DATABASE_URL_DOCKER}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: myapp-service
+  name: cncf-service
 spec:
   selector:
-    app: myapp
+    app: cncf-dashboard
   ports:
   - protocol: TCP
     port: 80
